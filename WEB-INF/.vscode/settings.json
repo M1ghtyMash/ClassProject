@@ -1,8 +1,7 @@
 {
-    "java.project.referencedLibraries": [
-      "WEB-INF/lib/**/*.jar"
-    ],
-    "java.project.sourcePaths": ["src"],
-    "java.project.outputPath": "WEB-INF/classes"
-  }
-  
+  "java.project.sourcePaths": ["src"],
+  "java.project.outputPath": "WEB-INF/classes",
+  "java.project.referencedLibraries": [
+    "WEB-INF/lib/**/*.jar"
+  ]
+}
