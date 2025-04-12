@@ -1,0 +1,9 @@
+<servlet>
+    <servlet-name>StudentListServlet</servlet-name>
+    <servlet-class>servlets.StudentListServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>StudentListServlet</servlet-name>
+    <url-pattern>/students</url-pattern>
+</servlet-mapping>
