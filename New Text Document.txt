@@ -1,0 +1,1 @@
+javac -cp "lib/*" -d WEB-INF/classes src/utils/DBUtil.java src/servlets/*.java

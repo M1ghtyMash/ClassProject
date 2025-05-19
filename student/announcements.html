@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Announcements | Student Management System</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+        color: #2e2e2e;
+        min-height: 100vh;
+        position: relative;
+        padding-bottom: 60px;
+      }
+
+      header {
+        background: #008000;
+        color: #fff;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      nav ul li {
+        display: inline;
+        margin: 0 12px;
+      }
+
+      nav ul li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #caffd1;
+      }
+
+      .logout {
+        background: #ff4d4d;
+        padding: 6px 14px;
+        border-radius: 5px;
+        margin-left: 10px;
+        transition: background 0.3s;
+      }
+
+      .logout:hover {
+        background: #e60000;
+      }
+
+      main {
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-image: url("image/logo.jpg");
+        background-size: 200px;
+        background-position: left bottom;
+        background-repeat: no-repeat;
+      }
+
+      .welcome {
+        background: #ffffffea;
+        padding: 40px;
+        border-radius: 15px;
+        width: 70%;
+        max-width: 800px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .welcome h2 {
+        font-size: 28px;
+        color: #2e7d32;
+        margin-bottom: 10px;
+      }
+
+      .announcement-list {
+        width: 90%;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .announcement-card {
+        background: #ffffffd9;
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+      }
+
+      .announcement-card:hover {
+        transform: scale(1.02);
+      }
+
+      .announcement-card h3 {
+        color: #388e3c;
+        margin-bottom: 10px;
+      }
+
+      .announcement-card p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+
+      .announcement-card .date {
+        font-size: 14px;
+        color: #555;
+      }
+
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        background: #008000;
+        color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Student Management System</h1>
+      <nav>
+        <ul>
+          <li><a href="student_homepage.html">Dashboard</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="grades.html">Grades</a></li>
+          <li><a href="attendance.html">Attendance</a></li>
+          <li><a href="#">Announcements</a></li>
+          <li><a href="login.html" class="logout">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="welcome">
+        <h2>Announcements</h2>
+        <p>Stay updated with the latest news and information.</p>
+      </section>
+
+      <section class="announcement-list" id="announcementList">
+        <!-- Announcements will be inserted here -->
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Student Management System. All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("http://localhost:8080/ClassProject/announcements")
+          .then((res) => res.json())
+          .then((data) => {
+            const list = document.getElementById("announcementList");
+            if (data.length === 0) {
+              list.innerHTML = "<p>No announcements found.</p>";
+              return;
+            }
+
+            data.forEach((a) => {
+              const card = document.createElement("div");
+              card.className = "announcement-card";
+              card.innerHTML = `
+                <h3>${a.title}</h3>
+                <p>${a.message}</p>
+                <p class="date">📅 Posted on: ${a.date}</p>
+                <p><strong>Target:</strong> ${a.targetGroup}</p>
+              `;
+              list.appendChild(card);
+            });
+          })
+          .catch((err) => {
+            console.error("Failed to load announcements:", err);
+          });
+      });
+    </script>
+  </body>
+</html>

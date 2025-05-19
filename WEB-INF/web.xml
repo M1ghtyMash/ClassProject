@@ -44,4 +44,44 @@
         <url-pattern>/student-attendance</url-pattern>
     </servlet-mapping>
 
+    <!-- Announcements Servlet -->
+    <servlet>
+        <servlet-name>AnnouncementsServlet</servlet-name>
+        <servlet-class>servlets.AnnouncementsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AnnouncementsServlet</servlet-name>
+        <url-pattern>/announcements</url-pattern>
+    </servlet-mapping>
+
+    <!-- Teacher Classes Servlet -->
+    <servlet>
+        <servlet-name>TeacherClassesServlet</servlet-name>
+        <servlet-class>servlets.TeacherClassesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TeacherClassesServlet</servlet-name>
+        <url-pattern>/teacher-classes</url-pattern>
+    </servlet-mapping>
+
+    <!-- Get Students for Subject Servlet -->
+    <servlet>
+        <servlet-name>GetStudentsForSubjectServlet</servlet-name>
+        <servlet-class>servlets.GetStudentsForSubjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetStudentsForSubjectServlet</servlet-name>
+        <url-pattern>/get-students</url-pattern>
+    </servlet-mapping>
+
+    <!-- Mark Subject Attendance Servlet -->
+    <servlet>
+        <servlet-name>MarkSubjectAttendanceServlet</servlet-name>
+        <servlet-class>servlets.MarkSubjectAttendanceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarkSubjectAttendanceServlet</servlet-name>
+        <url-pattern>/mark-subject-attendance</url-pattern>
+    </servlet-mapping>
+
 </web-app>

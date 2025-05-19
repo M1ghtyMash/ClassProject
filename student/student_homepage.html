@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Dashboard | Student Management System</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
@@ -10,7 +10,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
       body {
@@ -156,7 +156,7 @@
           <li><a href="schedule.html">Schedule</a></li>
           <li><a href="grades.html">Grades</a></li>
           <li><a href="attendance.html">Attendance</a></li>
-          <li><a href="#">Announcements</a></li>
+          <li><a href="announcements.html">Announcements</a></li>
           <li><a href="login.html" class="logout">Logout</a></li>
         </ul>
       </nav>
@@ -185,7 +185,9 @@
         fetch("http://localhost:8080/ClassProject/student-dashboard")
           .then((res) => res.json())
           .then((data) => {
-            document.querySelector(".welcome h2").textContent = `Welcome, ${data.name}!`;
+            document.querySelector(
+              ".welcome h2"
+            ).textContent = `Welcome, ${data.name}!`;
 
             const scheduleCard = document.getElementById("schedule");
             scheduleCard.innerHTML = "<h3>Today's Schedule</h3>";
