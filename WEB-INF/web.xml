@@ -64,15 +64,7 @@
         <url-pattern>/teacher-classes</url-pattern>
     </servlet-mapping>
 
-    <!-- Get Students for Subject Servlet -->
-    <servlet>
-        <servlet-name>GetStudentsForSubjectServlet</servlet-name>
-        <servlet-class>servlets.GetStudentsForSubjectServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GetStudentsForSubjectServlet</servlet-name>
-        <url-pattern>/get-students</url-pattern>
-    </servlet-mapping>
+   
 
     <!-- Mark Subject Attendance Servlet -->
     <servlet>

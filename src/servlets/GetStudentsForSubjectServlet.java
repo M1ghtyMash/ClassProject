@@ -1,5 +1,3 @@
-package servlets;
-
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebServlet;
 import java.io.*;
@@ -9,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import utils.DBUtil;
 
-@WebServlet("/get-students")
+@WebServlet("/get-students-by-subject")
 public class GetStudentsForSubjectServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -37,7 +35,7 @@ public class GetStudentsForSubjectServlet extends HttpServlet {
 
             while (rs.next()) {
                 JSONObject student = new JSONObject();
-                student.put("id", rs.getInt("student_id"));
+                student.put("student_id", rs.getInt("student_id"));
                 student.put("name", rs.getString("name"));
                 studentArray.put(student);
             }

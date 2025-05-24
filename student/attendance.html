@@ -224,6 +224,7 @@
               <thead>
                 <tr>
                   <th>Date</th>
+                  <th>Subject</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -241,20 +242,18 @@
     </footer>
 
     <script>
-      let attendanceData = {}; // will be filled from server
+      let attendanceData = {}; // Populated by the backend
 
       async function fetchAttendanceData() {
         try {
           const response = await fetch(
             "http://localhost:8080/ClassProject/student-attendance"
           );
-          if (!response.ok) {
-            throw new Error("Failed to fetch data");
-          }
+          if (!response.ok) throw new Error("Failed to fetch data");
+
           const data = await response.json();
-          attendanceData = data.attendance; // <-- Only attendance part
-          console.log("Attendance data loaded:", attendanceData);
-          updateAttendanceTable("January");
+          attendanceData = data.attendance;
+          updateAttendanceTable("May"); // Default month
         } catch (error) {
           console.error("Error loading attendance:", error);
         }
@@ -265,19 +264,19 @@
         tbody.innerHTML = "";
 
         const records = attendanceData[month] || [];
+
         if (records.length === 0) {
           const row = document.createElement("tr");
-          row.innerHTML = `
-            <td colspan="2">No attendance records available for ${month}.</td>
-          `;
+          row.innerHTML = `<td colspan="3">No attendance records available for ${month}.</td>`;
           tbody.appendChild(row);
         } else {
           records.forEach((record) => {
             const row = document.createElement("tr");
             row.innerHTML = `
-              <td>${record.date}</td>
-              <td>${record.status}</td>
-            `;
+          <td>${record.date}</td>
+          <td>${record.subject}</td>
+          <td>${record.status}</td>
+        `;
             tbody.appendChild(row);
           });
         }
@@ -287,10 +286,10 @@
       }
 
       function updateSummary(records) {
-        let total = records.length;
-        let present = records.filter((r) => r.status === "Present").length;
-        let absent = records.filter((r) => r.status === "Absent").length;
-        let late = records.filter((r) => r.status === "Late").length;
+        const total = records.length;
+        const present = records.filter((r) => r.status === "Present").length;
+        const absent = records.filter((r) => r.status === "Absent").length;
+        const late = records.filter((r) => r.status === "Late").length;
 
         document.getElementById("total-classes").textContent = total;
         document.getElementById("present-count").textContent = present;
@@ -299,11 +298,11 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        const monthSelect = document.getElementById("month-select");
-
-        monthSelect.addEventListener("change", (e) => {
-          updateAttendanceTable(e.target.value);
-        });
+        document
+          .getElementById("month-select")
+          .addEventListener("change", (e) => {
+            updateAttendanceTable(e.target.value);
+          });
 
         fetchAttendanceData();
       });

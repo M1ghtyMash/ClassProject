@@ -8,7 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import utils.DBUtil;
 
-@WebServlet("/mark-subject-attendance")
+//@WebServlet("/mark-subject-attendance")
 public class MarkSubjectAttendanceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

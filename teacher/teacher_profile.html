@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Profile | Student Management System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #008000;
+      color: #fff;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 12px;
+    }
+
+    nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .logout {
+      background: #ff4d4d;
+      padding: 6px 14px;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-container {
+      background: #ffffffea;
+      padding: 40px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 700px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-container h2 {
+      text-align: center;
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+
+    .profile-info {
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .subjects-list {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .subjects-list li {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      background: #008000;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Student Management System</h1>
+    <nav>
+      <ul>
+        <li><a href="teacher_classes.html">Classes</a></li>
+        <li><a href="attendance.html">Attendance</a></li>
+        <li><a href="grades.html">Grades</a></li>
+        <li><a href="teacher_announcements.html">Announcements</a></li>
+        <li><a href="teacher_profile.html">Profile</a></li>
+        <li><a href="login.html" class="logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="profile-container">
+      <h2>Teacher Profile</h2>
+      <div class="profile-info" id="profile-details">
+        <!-- Filled by script -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Student Management System. All rights reserved.</p>
+  </footer>
+
+  <script>
+    fetch("http://localhost:8080/ClassProject/teacher-profile")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("profile-details");
+
+        if (data.error) {
+          container.innerHTML = "<p>Error loading profile.</p>";
+          return;
+        }
+
+        container.innerHTML = `
+          <p><strong>Teacher ID:</strong> ${data.teacher_id}</p>
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Email:</strong> ${data.email}</p>
+          <p><strong>Subjects Taught:</strong></p>
+          <ul class="subjects-list">
+            ${data.subjects.map(sub => `<li>${sub}</li>`).join("")}
+          </ul>
+        `;
+      })
+      .catch(err => {
+        console.error("Error fetching profile:", err);
+        document.getElementById("profile-details").innerHTML = "<p>Error loading profile.</p>";
+      });
+  </script>
+</body>
+</html>
